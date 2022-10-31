@@ -1,0 +1,62 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# wikiplantbaser
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+Wikiplantbaser provides an easy access to the floristic records stored in 
+the Wikiplantbase #Italia online database (http://bot.biologia.unipi.it/wpb/italia).
+As of November 2022, the database stores around 700k georeferenced occurrence points 
+for approximately 4k plant names. Wikiplantbaser is not meant as a tool for a massive
+download of hundreds of thousands of records. Instead, it is geared to facilitate the 
+download of subsets of data, especially at genus or section level, and the production
+of publication-grade maps.
+
+Its main workhorse is wpb_getByTaxon(), that accepts a vector of plant names as parameter
+and returns all occurrence points for those names. Partial names are accepted: for instance,
+the name "Crocus" will return all occurrences of all species of Crocus stored in the database.
+
+## Installation
+
+You can install the development version of wikiplantbaser from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("gibedini/wikiplantbaser")
+```
+
+## Example
+
+This is a basic example which shows you how to obtain all occurrence points 
+for Crocus etruscus Parl.:
+
+```{r example}
+library(wikiplantbaser)
+wpb_getByTaxon(c("Crocus etruscus Parl."))
+## basic example code
+```
+
+The above line will return a dataframe with eight columns and a number of rows matching 
+the number of records extracted from the database. A call with a partial name, like this:
+
+
+```{r example2}
+library(wikiplantbaser)
+wpb_getByTaxon(c("Crocus"))
+```
+
+will return all occurrences of all species of Crocus.

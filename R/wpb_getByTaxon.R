@@ -20,6 +20,6 @@ wpb_getByTaxon <- function(taxon = c('Crocus etruscus Parl.')) {
   bodi <- rjson::toJSON(list(taxon=taxon))
   a <- httr::POST(url,body = bodi,encode = "json")
   b <- httr::content(a, as="text")
-  c <- readr::read_csv(b)
+  c <- readr::read_csv(b,col_types = "icccicddc")
   return(c)
 }

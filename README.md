@@ -39,48 +39,76 @@ points for Crocus etruscus Parl.:
 ``` r
 library(wikiplantbaser)
 wpb_getByTaxon(c("Crocus etruscus Parl."))
-#> Rows: 240 Columns: 8
-#> ── Column specification ────────────────────────────────────────────────────────
-#> Delimiter: ","
-#> chr (4): tipo_reperto, tiposegn, esotic, nome_reperto
-#> dbl (4): accuratezza, annoreperto, lat_wgs84, lon_wgs84
-#> 
-#> ℹ Use `spec()` to retrieve the full column specification for this data.
-#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-#> # A tibble: 240 × 8
-#>    tipo_reperto tiposegn esotic accuratezza annoreperto lat_wg…¹ lon_w…² nome_…³
-#>    <chr>        <chr>    <chr>        <dbl>       <dbl>    <dbl>   <dbl> <chr>  
-#>  1 B            presenza nativa           3        2010     42.8    11.5 Crocus…
-#>  2 B            presenza nativa           3        2010     42.9    11.0 Crocus…
-#>  3 B            presenza nativa           4        2010     42.9    11.6 Crocus…
-#>  4 O            presenza nativa           5        2021     42.8    10.8 Crocus…
-#>  5 O            presenza nativa           5        2021     43.1    10.6 Crocus…
-#>  6 B            presenza nativa           5        2019     43.2    11.3 Crocus…
-#>  7 O            presenza nativa           5        2021     43.2    10.9 Crocus…
-#>  8 O            presenza nativa           5        2021     43.2    10.9 Crocus…
-#>  9 O            presenza nativa           5        2021     43.1    10.9 Crocus…
-#> 10 O            presenza nativa           4        2022     43.1    10.6 Crocus…
-#> # … with 230 more rows, and abbreviated variable names ¹​lat_wgs84, ²​lon_wgs84,
-#> #   ³​nome_reperto
+#> # A tibble: 1,760 × 9
+#>        id record_type occurrenc…¹ esotic accur…² occur…³ lat_w…⁴ lon_w…⁵ taxon…⁶
+#>     <int> <chr>       <chr>       <chr>    <int> <chr>     <dbl>   <dbl> <chr>  
+#>  1 289269 O           presenza    nativa       4 2005       44.5    9.01 Crocus…
+#>  2 289268 O           presenza    nativa       4 2010       44.4    8.73 Crocus…
+#>  3 402415 O           presenza    nativa       5 2019       45.8   10.9  Crocus…
+#>  4 402424 O           presenza    nativa       5 2013       46.3   12.9  Crocus…
+#>  5 784903 P           presenza    nativa       4 g 09       44.3    7.96 Crocus…
+#>  6 402366 O           presenza    nativa       5 2015       45.8   10.9  Crocus…
+#>  7 289267 O           presenza    nativa       4 2005       44.5    9.03 Crocus…
+#>  8 400177 H           presenza    nativa       4 1907       44.5    9.49 Crocus…
+#>  9 402376 O           presenza    nativa       5 2007       44.4    6.90 Crocus…
+#> 10 289266 O           presenza    nativa       4 2010       44.4    9.21 Crocus…
+#> # … with 1,750 more rows, and abbreviated variable names ¹​occurrence_type,
+#> #   ²​accuracy, ³​occurrence_year, ⁴​lat_wgs84, ⁵​lon_wgs84, ⁶​taxon_name
 ## basic example code
 ```
 
-The above line will return a dataframe with eight columns and a number
-of rows matching the number of records extracted from the database. A
-call with a partial name, like this:
+The above line will return a dataframe with nine columns and a number of
+rows matching the number of records extracted from the database. A call
+with a partial name, like this:
 
 ``` r
 library(wikiplantbaser)
 wpb_getByTaxon(c("Crocus"))
-#> Rows: 0 Columns: 1
-#> ── Column specification ────────────────────────────────────────────────────────
-#> Delimiter: ","
-#> chr (1): Error in converting to csv
-#> 
-#> ℹ Use `spec()` to retrieve the full column specification for this data.
-#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-#> # A tibble: 0 × 1
-#> # … with 1 variable: Error in converting to csv <chr>
+#> # A tibble: 1,760 × 9
+#>        id record_type occurrenc…¹ esotic accur…² occur…³ lat_w…⁴ lon_w…⁵ taxon…⁶
+#>     <int> <chr>       <chr>       <chr>    <int> <chr>     <dbl>   <dbl> <chr>  
+#>  1 289267 O           presenza    nativa       4 2005       44.5    9.03 Crocus…
+#>  2 289271 O           presenza    nativa       4 2005       44.5    9.44 Crocus…
+#>  3 402376 O           presenza    nativa       5 2007       44.4    6.90 Crocus…
+#>  4 414636 B           presenza    nativa       4 0          44.3    9.85 Crocus…
+#>  5 784903 P           presenza    nativa       4 g 09       44.3    7.96 Crocus…
+#>  6 289266 O           presenza    nativa       4 2010       44.4    9.21 Crocus…
+#>  7 289265 O           presenza    nativa       4 2004       44.5    9.02 Crocus…
+#>  8 289264 O           presenza    nativa       4 2011       44.4    9.03 Crocus…
+#>  9 402424 O           presenza    nativa       5 2013       46.3   12.9  Crocus…
+#> 10 502552 B           presenza    nativa       4 1985       44.2    7.93 Crocus…
+#> # … with 1,750 more rows, and abbreviated variable names ¹​occurrence_type,
+#> #   ²​accuracy, ³​occurrence_year, ⁴​lat_wgs84, ⁵​lon_wgs84, ⁶​taxon_name
 ```
 
 will return all occurrences of all species of Crocus.
+
+## Dataframe columns
+
+1.  ID, an integer, primary key of the record in the database.
+
+2.  record\_type, one character: B = bibliographic record; O =
+    unpublished field observation; H = unpublished herbarium specimen; P
+    = published herbarium specimen.
+
+3.  occurrence\_type, character: presenza = occurrence; dubbia =
+    doubtful occurrence; esclusione = confirmed absence,
+
+4.  esotic, character: nativa = native; esotica casuale = casual alien;
+    esotica avventizia = adventitious alien; esotica naturalizzata =
+    naturalised alien; coltivata = cultivated.
+
+5.  accuracy, integer: 5 = \< 1km; 4 = \< 10km; 3 = \< 50km; 2 = within
+    an administrative region; 1 = unknown.
+
+6.  occurrence\_year, character: year of occurrence (might be a range in
+    the form y1-y2).
+
+7.  lat\_wgs84, double: latitude N in decimal degrees, datum 4326 (WGS84
+    ellipsoid)
+
+8.  lon\_wgs84, double: longitude E in decimal degrees, datum 4326
+    (WGS84 ellipsoid)
+
+9.  taxon\_name, character: a scientific name included in the Checklist
+    of the Italian flora (<https://dryades.units.it/floritaly>)

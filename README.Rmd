@@ -50,7 +50,7 @@ wpb_getByTaxon(c("Crocus etruscus Parl."))
 ## basic example code
 ```
 
-The above line will return a dataframe with eight columns and a number of rows matching 
+The above line will return a dataframe with nine columns and a number of rows matching 
 the number of records extracted from the database. A call with a partial name, like this:
 
 
@@ -60,3 +60,24 @@ wpb_getByTaxon(c("Crocus"))
 ```
 
 will return all occurrences of all species of Crocus.
+
+## Dataframe columns
+1. ID, an integer, primary key of the record in the database.
+
+2. record_type, one character: B = bibliographic record; O = unpublished field observation; H = unpublished herbarium specimen; P = published herbarium specimen.
+
+3. occurrence_type, character: presenza = occurrence; dubbia = doubtful occurrence; esclusione = confirmed absence,
+
+4. esotic, character: nativa = native; esotica casuale = casual alien; esotica avventizia = adventitious alien; esotica naturalizzata = naturalised alien; coltivata = cultivated.
+
+5. accuracy, integer: 5 = < 1km; 4 = < 10km; 3 = < 50km; 2 = within an administrative region; 1 = unknown.
+
+6. occurrence_year, character: year of occurrence (might be a range in the form y1-y2).
+
+7. lat_wgs84, double: latitude N in decimal degrees, datum 4326 (WGS84 ellipsoid)
+
+8. lon_wgs84, double: longitude E in decimal degrees, datum 4326 (WGS84 ellipsoid)
+
+9. taxon_name, character: a scientific name included in the Checklist of the Italian flora (https://dryades.units.it/floritaly)
+
+

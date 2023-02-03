@@ -10,16 +10,18 @@
 #' (https://dryades.units.it/floritaly). Partial names (e.g. "Crocus il")
 #' will be retrieved as all names starting with the partial value.
 #'
-#' @return A dataframe
+#' @param gc_prec A number, matching the desired number of decimals in
+#' the geographic coordinates.This parameter is used by helper functions
+#' to reduce possible bias caused by overlapping records of the same taxon.
+#'
+#' @return A spatial dataframe
 #' @export
 #'
 #' @examples wpb_getByTaxon(c("Crocus etruscus Parl.","Crocus il"))
-wpb_getByTaxon <- function(taxon = c('Crocus etruscus Parl.')) {
+wpb_getByTaxon <- function(taxon = c('Crocus etruscus Parl.'),gc_prec = 2) {
+  if("" %in% taxon) taxon <- c('Crocus etruscus Parl.')
   url <- 'http://bot.biologia.unipi.it/wpbold/php/wpb_getByTaxon.php'
-  #taxon = 'Crocus etruscus Parl.'
   bodi <- rjson::toJSON(list(taxon=taxon))
-  a <- httr::POST(url,body = bodi,encode = "json")
-  b <- httr::content(a, as="text")
-  c <- readr::read_csv(b,col_types = "icccicddc")
-  return(c)
+  r <- wpb_postRequest(url = url, body = bodi, gc_prec = gc_prec)
+  return(r)
 }

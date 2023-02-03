@@ -4,16 +4,20 @@
 \alias{wpb_getByTaxon}
 \title{Easy access to Wikiplantbase}
 \usage{
-wpb_getByTaxon(taxon = c("Crocus etruscus Parl."))
+wpb_getByTaxon(taxon = c("Crocus etruscus Parl."), gc_prec = 2)
 }
 \arguments{
 \item{taxon}{A vector of valid scientific names of vascular plant
 according to the online Checklist of the Ittalian flora
 (https://dryades.units.it/floritaly). Partial names (e.g. "Crocus il")
 will be retrieved as all names starting with the partial value.}
+
+\item{gc_prec}{A number, matching the desired number of decimals in
+the geographic coordinates.This parameter is used by helper functions
+to reduce possible bias caused by overlapping records of the same taxon.}
 }
 \value{
-A dataframe
+A spatial dataframe
 }
 \description{
 Get georeferenced records for taxa of the Italian vascular flora

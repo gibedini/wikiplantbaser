@@ -3,6 +3,8 @@
 #' Plots occurrence points on a map of Italy
 #'
 #' @param xx a spatial dataframe such as that produced by \code{wpb_getByTaxon}
+#' @param zoomLev one of "Italy", "occpts", zooming to Italy or occurrence points
+#' @param occur_type one of "presenza", "dubbia","esclusione"
 #' @param ... other parameters passed on
 #'
 #' @return a ggplot2 object
@@ -10,8 +12,12 @@
 #'
 #' @examples
 #' ce_plot <- wpb_plot(wpb_crocEtrOcc)
-wpb_plot <- function(xx, zoomLev = "Italy",...) {
-
+wpb_plot <- function(xx, zoomLev = "Italy", occur_type = c("presenza","dubbia","esclusione"), ...) {
+  yy <- NULL
+  for(i in 1:length(occur_type)) {
+    yy <- dplyr::bind_rows(yy,dplyr::filter(xx,occurrence_type == occur_type[i]))
+  }
+  xx <- yy
   ggplot2::theme_set(ggplot2::theme_bw())
   u_nrep <- unique(xx$taxon_name)
   wpb_nomi <- paste(u_nrep,sep='', collapse = ', ')
@@ -35,8 +41,8 @@ wpb_plot <- function(xx, zoomLev = "Italy",...) {
                size = 2, col = "black") +
     ggplot2::labs(x="Longitude", y="Latitude") +
     #size = 0.7, fill = factor(xx$nome_reperto)) +
-    viridis::scale_color_viridis(discrete = TRUE) +
-    ggplot2::scale_shape_manual(values = c(21,22,23)) +
+    viridis::scale_fill_viridis(discrete = TRUE, option = "plasma") +
+    ggplot2::scale_shape_manual(values = c(21,23,24)) +
     ggplot2::theme(legend.position = c(1,1),
           legend.justification = c(1,1),
           legend.box.just = "right",

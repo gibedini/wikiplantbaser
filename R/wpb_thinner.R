@@ -36,8 +36,13 @@
 #'
 #'
 wpb_thinner <- function(wpb_occurrences,coord_decimals) {
-  df <- dplyr::mutate(wpb_occurrences,rlat = round(lat_wgs84,coord_decimals),
-              rlon = round(lon_wgs84,coord_decimals))
-  dg <- dplyr::distinct(df,taxon_name,rlat,rlon, .keep_all=TRUE)
+  if(coord_decimals >= 0) {
+    df <- dplyr::mutate(wpb_occurrences,rlat = round(lat_wgs84,coord_decimals),
+                        rlon = round(lon_wgs84,coord_decimals))
+    dg <- dplyr::distinct(df,taxon_name,rlat,rlon, .keep_all=TRUE)
+  } else {
+    dg <- dplyr::mutate(wpb_occurrences,rlat = lat_wgs84,
+                        rlon = lon_wgs84)
+  }
   return(dg)
 }

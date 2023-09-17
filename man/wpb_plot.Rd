@@ -4,10 +4,19 @@
 \alias{wpb_plot}
 \title{Plot occurrence points}
 \usage{
-wpb_plot(xx, ...)
+wpb_plot(
+  xx,
+  zoomLev = "Italy",
+  occur_type = c("presenza", "dubbia", "esclusione"),
+  ...
+)
 }
 \arguments{
 \item{xx}{a spatial dataframe such as that produced by \code{wpb_getByTaxon}}
+
+\item{zoomLev}{one of "Italy", "occpts", zooming to Italy or occurrence points}
+
+\item{occur_type}{one of "presenza", "dubbia","esclusione"}
 
 \item{...}{other parameters passed on}
 }

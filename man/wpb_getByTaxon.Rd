@@ -4,13 +4,24 @@
 \alias{wpb_getByTaxon}
 \title{Easy access to Wikiplantbase}
 \usage{
-wpb_getByTaxon(taxon = c("Crocus etruscus Parl."), gc_prec = 2)
+wpb_getByTaxon(
+  taxon = c("Crocus etruscus Parl."),
+  subproject = "ITA",
+  gc_prec = 2
+)
 }
 \arguments{
 \item{taxon}{A vector of valid scientific names of vascular plant
-according to the online Checklist of the Ittalian flora
+according to the online Checklist of the Italian flora
 (https://dryades.units.it/floritaly). Partial names (e.g. "Crocus il")
 will be retrieved as all names starting with the partial value.}
+
+\item{subproject}{A vector of abbreviations of Italian region names
+according the the online Checklist of the Italian flora
+(https://dryades.units.it/floritaly), as follows: EMR=Emilia-Romagna; LIG=Liguria;
+SAR=Sardinia; SIC=Sicily; TOS=Toscana. When passed, it instructs the server
+to return only the records collected within the regional territory, otherwise
+it defaults to ITA and returns all records from the whole national territory.}
 
 \item{gc_prec}{A number, matching the desired number of decimals in
 the geographic coordinates.This parameter is used by helper functions
